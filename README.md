@@ -50,24 +50,24 @@ Split up your services
 
 2. Cut the Redis service from your compose.yaml file and paste it into your new infra.yaml file. Make sure you add the services top-level attribute at the top of your file. Your infra.yaml file should now look like this:
 
-    services:
-      redis:
-        image: "redis:alpine"
+     services:
+       redis:
+         image: "redis:alpine"
 
 3. In your compose.yaml file, add the include top-level attribute along with the path to the infra.yaml file.
 
-    include:
-    - infra.yaml
-    services:
-    web:
-        build: .
-        ports:
-        - "8000:5000"
-        develop:
-        watch:
-            - action: sync
-            path: .
-            target: /code
+     include:
+     - infra.yaml
+     services:
+     web:
+         build: .
+         ports:
+         - "8000:5000"
+         develop:
+         watch:
+             - action: sync
+             path: .
+             target: /code
 
 4. Run docker compose up to build the app with the updated Compose files, and run it. You should see the Hello world message in your browser.
 
